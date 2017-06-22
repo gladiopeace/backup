@@ -1,0 +1,56 @@
+apt-get install build-essential
+apt-get install autoconf automake libtool unzip git
+
+wget https://ftp.pcre.org/pub/pcre/pcre-8.40.zip
+cd pcre-8.40
+./configure --prefix=/usr --enable-utf8 --enable-unicode-properties
+make
+make install
+
+wget https://tls.mbed.org/download/mbedtls-2.4.0-gpl.tgz
+cd mbedtls-2.4.0
+make
+make install
+
+wget https://github.com/jedisct1/libsodium/releases/download/1.0.11/libsodium-1.0.11.tar.gz
+cd libsodium-1.0.11
+./configure --prefix=/usr --disable-ssp
+make
+make install
+
+git clone https://github.com/shadowsocks/libudns
+cd libudns
+./autogen.sh
+./configure --prefix=/usr
+make
+make install
+
+wget http://dist.schmorp.de/libev/libev-4.24.tar.gz
+cd libev-4.24
+./configure --prefix=/usr
+make
+make install
+
+git clone https://github.com/shadowsocks/shadowsocks-libev.git
+cd shadowsocks-libev
+git submodule update --init --recursive
+./autogen.sh
+./configure --prefix=/usr --with-pcre=/usr/lib/pcre --with-mbedtls=/usr/lib/mbedtls --with-sodium=/usr/lib/libsodium --disable-ssp --disable-documentation 
+make
+make install
+
+--------------------------------------------------
+
+ss-server -a nobody -u -c /etc/shadowsocks-libev/config.conf -f /var/run/shadowsocks.pid
+
+cat /etc/shadowsocks-libev/config.conf
+{
+	"server":"$SERVER_IP",
+	"server_port":$SERVER_PORT,
+	"local_address":"127.0.0.1",
+	"local_port":1080,
+	"password":"$SERVER_PASS",
+	"timeout":300,
+	"method":"chacha20"
+}
+
