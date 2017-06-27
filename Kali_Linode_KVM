@@ -80,17 +80,27 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 EOF
 
-export sda2_UUID=$(blkid /dev/sda2|cut -d" " -f2|sed 's/"//g')
 cat > /etc/crypttab << EOF
-sda2-crypt $sda2_UUID none luks
+sda2-crypt /dev/sda2 none luks
 EOF
 
-export SDA1_UUID=$(blkid /dev/sda1|cut -d" " -f2|sed 's/"//g')
 cat > /etc/fstab << EOF
 /dev/mapper/vg-root /               ext4    errors=remount-ro 0       1
-$SDA1_UUID /boot           ext3    defaults        0       2
+/dev/sda1 /boot           ext3    defaults        0       2
 /dev/mapper/vg-swap none            swap    sw              0       0
 EOF
+
+#export sda2_UUID=$(blkid /dev/sda2|cut -d" " -f2|sed 's/"//g')
+#cat > /etc/crypttab << EOF
+#sda2-crypt $sda2_UUID none luks
+#EOF
+
+#export SDA1_UUID=$(blkid /dev/sda1|cut -d" " -f2|sed 's/"//g')
+#cat > /etc/fstab << EOF
+#/dev/mapper/vg-root /               ext4    errors=remount-ro 0       1
+#$SDA1_UUID /boot           ext3    defaults        0       2
+#/dev/mapper/vg-swap none            swap    sw              0       0
+#EOF
 
 cat >> /etc/modprobe.d/blacklist.conf<< EOF
 blacklist floppy
