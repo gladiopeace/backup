@@ -133,6 +133,7 @@ systemctl set-default multi-user.target
 update-initramfs -u
 
 passwd root
+sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 exit
 
 #手工卸载重启
