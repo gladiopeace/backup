@@ -13,6 +13,8 @@ dpkg -i google-chrome-stable_current_amd64.deb
 tar xvf firefox-54.0.1.tar.bz2 -C /usr/lib/
 ln -s /usr/lib/firefox/firefox-bin /usr/bin/firefox-moz
 sed -i 's#firefox-esr#firefox-moz#' /usr/bin/firefox
+cp /usr/share/applications/{firefox-esr.desktop,firefox-moz.desktop}
+sed -i 's#/usr/lib/firefox-esr/firefox-esr#/usr/lib/firefox/firefox-bin#' /usr/share/applications/firefox-moz.desktop
 
 #flash_player
 tar xvf flash_player_npapi_linux.x86_64.tar.gz
