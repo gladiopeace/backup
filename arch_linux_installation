@@ -1,0 +1,61 @@
+parted -s /dev/sda mklabel dos
+parted -s /dev/sda mkpart primary swap 0% 2G
+parted -s /dev/sda mkpart primary ext4 2G 100%
+mkswap /dev/sda1
+mkfs.ext4 /dev/sda2
+mount -t ext4 /dev/sda2 /mnt
+
+pacstrap /mnt base
+pacstrap -i /mnt base base-devel
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+
+
+ln -sf /usr/share/zoneinfo/Asia/Chongqing /etc/localtime
+
+cat > /etc/locale.gen << EOF
+en_US.UTF-8 UTF-8  
+zh_CN.UTF-8 UTF-8  
+EOF
+
+locale-gen
+
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+
+mkinitcpio -p linux
+
+pacman -S grub
+grub-install /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+
+pacman -S net-tools dnsutils inetutils iproute2
+pacman -S openssh
+
+systemctl enable dhcpcd.service
+ 
+pacman -S networkmanager
+systemctl enable NetworkManager
+ 
+pacman -S gnome gnome-extra
+systemctl enable gdm
+
+tar xvf firefox-54.0.1.tar.bz2 -C /usr/local/share/
+ln -s /usr/local/share/firefox/firefox /usr/bin/firefox
+
+useradd -m -G wheel -s /bin/bash huatux
+passwd huatux
+passwd root
+
+pacman -S fcitx fcitx-im fcitx-googlepinyin fcitx-configtool
+cat > /home/huatux/.xprofile << EOF
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+EOF
+
+cat > /home/huatux/.xinitrc << EOF
+exec gnome-session
+EOF
+
+exit
+reboot
