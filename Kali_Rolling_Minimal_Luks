@@ -38,7 +38,7 @@ chroot /mnt/kali/ /bin/bash
 apt-get update
 #apt-get upgrade
 
-apt-get -y install net-tools initramfs-tools openssh-server linux-image-4.9.0-kali4-amd64
+apt-get -y install net-tools initramfs-tools openssh-server linux-image-4.13.0-kali1-amd64
 
 apt-get -y install locales-all
 
