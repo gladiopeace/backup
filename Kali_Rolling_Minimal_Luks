@@ -20,9 +20,10 @@ mount /dev/mapper/vg-root /mnt/kali && cd /mnt/kali
 mkdir /mnt/kali/boot
 mount -t ext3 /dev/sda1 /mnt/kali/boot
 
-wget http://archive-5.kali.org/kali/pool/main/d/debootstrap/debootstrap_1.0.90kali1.tar.gz
-tar xvf debootstrap_1.0.90kali1.tar.gz -C /tmp
-ln -s /tmp/debootstrap-1.0.90kali1 /usr/share/debootstrap && cd /usr/share/debootstrap
+wget http://archive-5.kali.org/kali/pool/main/d/debootstrap/debootstrap_1.0.92kali1.tar.gz
+tar xvf debootstrap_1.0.92kali1.tar.gz -C /tmp
+rm -rf /usr/share/debootstrap
+ln -s /tmp/debootstrap-1.0.92kali1 /usr/share/debootstrap && cd /usr/share/debootstrap
 ./debootstrap --arch amd64 kali-rolling /mnt/kali http://archive-5.kali.org/kali
 
 mount -o bind /dev /mnt/kali/dev/
