@@ -95,6 +95,7 @@ cat >> /etc/modprobe.d/blacklist.conf<< EOF
 blacklist floppy
 EOF
 
+#grub2 安装的时候记得安装到/dev/sda Make sure Install Grub2 to sda
 apt-get -y install grub2
 
 ###############################For Linode Lish##################################
