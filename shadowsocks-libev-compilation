@@ -1,19 +1,19 @@
 apt-get install build-essential
 apt-get install autoconf automake libtool unzip git
 
-wget https://ftp.pcre.org/pub/pcre/pcre-8.40.zip
-cd pcre-8.40
+wget https://ftp.pcre.org/pub/pcre/pcre-8.41.zip
+cd pcre-8.41
 ./configure --prefix=/usr --enable-utf8 --enable-unicode-properties
 make
 make install
 
-wget https://tls.mbed.org/download/mbedtls-2.4.0-gpl.tgz
-cd mbedtls-2.4.0
+wget https://tls.mbed.org/download/mbedtls-2.6.0-gpl.tgz
+cd mbedtls-2.6.0
 make
 make install
 
-wget https://github.com/jedisct1/libsodium/releases/download/1.0.11/libsodium-1.0.11.tar.gz
-cd libsodium-1.0.11
+wget https://github.com/jedisct1/libsodium/releases/download/1.0.11/libsodium-1.0.13.tar.gz
+cd libsodium-1.0.13
 ./configure --prefix=/usr --disable-ssp
 make
 make install
