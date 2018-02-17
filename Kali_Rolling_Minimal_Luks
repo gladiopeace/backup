@@ -26,10 +26,8 @@ rm -rf /usr/share/debootstrap
 ln -s /tmp/debootstrap-1.0.93kali1 /usr/share/debootstrap && cd /usr/share/debootstrap
 ./debootstrap --arch amd64 kali-rolling /mnt/kali http://archive-5.kali.org/kali
 
-mount -o bind /dev /mnt/kali/dev/
-mount -o bind /dev/pts/ /mnt/kali/dev/pts
-mount -t proc /proc/ /mnt/kali/proc
-mount -t sysfs /sys/ /mnt/kali/sys
+for fs in /dev /sys /proc;do mount --bind $fs /mnt/kali$fs;done
+
 mv /etc/lvm/archive/ /mnt/kali/etc/lvm  
 mv /etc/lvm/backup/ /mnt/kali/etc/lvm
 
