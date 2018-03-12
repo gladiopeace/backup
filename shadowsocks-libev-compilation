@@ -1,5 +1,4 @@
-apt-get install build-essential
-apt-get install autoconf automake libtool unzip git
+apt-get install --no-install-recommends gettext build-essential autoconf libtool libpcre3-dev asciidoc xmlto libev-dev libc-ares-dev automake libmbedtls-dev libsodium-dev
 
 wget https://ftp.pcre.org/pub/pcre/pcre-8.41.zip
 cd pcre-8.41
@@ -7,21 +6,14 @@ cd pcre-8.41
 make
 make install
 
-wget https://tls.mbed.org/download/mbedtls-2.6.0-gpl.tgz
-cd mbedtls-2.6.0
+wget https://tls.mbed.org/download/mbedtls-2.7.0-gpl.tgz
+cd mbedtls-2.7.0
 make
 make install
 
-wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.13.tar.gz
-cd libsodium-1.0.13
+wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.16.tar.gz
+cd libsodium-1.0.16
 ./configure --prefix=/usr --disable-ssp
-make
-make install
-
-git clone https://github.com/shadowsocks/libudns
-cd libudns
-./autogen.sh
-./configure --prefix=/usr
 make
 make install
 
@@ -35,8 +27,8 @@ git clone https://github.com/shadowsocks/shadowsocks-libev.git
 cd shadowsocks-libev
 git submodule update --init --recursive
 ./autogen.sh
-#./configure --prefix=/usr --with-pcre=/usr/lib/pcre --with-mbedtls=/usr/lib/mbedtls --with-sodium=/usr/lib/libsodium --disable-ssp --disable-documentation 
 ./configure --with-sodium-include=/usr/include --with-sodium-lib=/usr/lib --with-mbedtls-include=/usr/include --with-mbedtls-lib=/usr/lib
+#./configure --prefix=/usr --with-pcre=/usr/lib/pcre --with-mbedtls=/usr/lib/mbedtls --with-sodium=/usr/lib/libsodium --disable-ssp --disable-documentation 
 make
 make install
 
@@ -46,12 +38,11 @@ ss-server -a nobody -u -c /etc/shadowsocks-libev/config.conf -f /var/run/shadows
 
 cat /etc/shadowsocks-libev/config.conf
 {
-	"server":"$SERVER_IP",
+	"server":"0.0.0.0",
 	"server_port":$SERVER_PORT,
-	"local_address":"127.0.0.1",
 	"local_port":1080,
 	"password":"$SERVER_PASS",
 	"timeout":300,
-	"method":"chacha20"
+	"method":"chacha20-ietf-poly1305"
 }
 
