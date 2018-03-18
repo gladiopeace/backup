@@ -34,15 +34,16 @@ make install
 
 --------------------------------------------------
 
-ss-server -a nobody -u -c /etc/shadowsocks-libev/config.conf -f /var/run/shadowsocks.pid
+ss-server -a nobody -u -c /etc/shadowsocks-libev/config.json -f /var/run/shadowsocks.pid
 
-cat /etc/shadowsocks-libev/config.conf
+cat << EOF > /etc/shadowsocks-libev/config.json
 {
 	"server":"0.0.0.0",
 	"server_port":$SERVER_PORT,
-	"local_port":1080,
+	"nameserver":"8.8.8.8",
 	"password":"$SERVER_PASS",
 	"timeout":300,
 	"method":"chacha20-ietf-poly1305"
 }
+EOF
 
