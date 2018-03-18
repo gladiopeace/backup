@@ -117,6 +117,8 @@ systemctl enable ssh
 update-initramfs -u
 
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+sed -i 's/1i Port 2200/' /etc/ssh/sshd_config
+
 
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
