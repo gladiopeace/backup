@@ -136,9 +136,9 @@ cat << EOF >> /target/etc/dropbear-initramfs/config
 DROPBEAR_OPTIONS="-p 2222"
 EOF
 
-cp ~/.ssh/authorized_keys /target/etc/dropbear-initramfs/authorized_keys
+cp ~/.ssh/authorized_keys /etc/dropbear-initramfs/authorized_keys
 
-echo $(grep DRIVER /sys/class/net/eth0/device/uevent|cut -d'=' -f2) >> /target/etc/initramfs-tools/modules
+echo $(grep DRIVER /sys/class/net/eth0/device/uevent|cut -d'=' -f2) >> /etc/initramfs-tools/modules
 
 cat << EOF >> 
 export IP=$STATIC_IP::$GATE_WAY:255.255.255.0:kali:eth0:off
