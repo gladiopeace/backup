@@ -132,7 +132,7 @@ passwd root
 ====================unlock Luks at boot time=================
 apt-get -y install busybox dropbear* initramfs-tools net-tools
 
-cat << EOF >> /target/etc/dropbear-initramfs/config
+cat << EOF >> /etc/dropbear-initramfs/config
 DROPBEAR_OPTIONS="-p 2222"
 EOF
 
