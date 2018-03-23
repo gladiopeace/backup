@@ -11,5 +11,5 @@ cryptsetup luksHeaderBackup --header-backup-file luksheader.back /dev/sda5
 gpg -e -r huatux luksheader.back
 #恢复luks头文件
 cryptsetup luksHeaderRestore --header-backup-file luksheader.back /dev/sda5
-#添加NUKE密码,输入次密码会清空所有密码槽
+#添加NUKE密码,输入此密码会清空所有密码槽
 cryptsetup luksAddNuke /dev/sda5
