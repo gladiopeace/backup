@@ -119,7 +119,6 @@ update-initramfs -u
 sed -i '1iPort 2200' /etc/ssh/sshd_config
 sed -i 's/^#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 sed -i 's$^#PasswordAuthentication.*$PasswordAuthentication no$' /etc/ssh/sshd_config
-sed -i 's$^PasswordAuthentication.*$PasswordAuthentication no$' /etc/ssh/sshd_config
 sed -i 's@^#AuthorizedKeysFile.*@AuthorizedKeysFile .ssh/authorized_keys@' /etc/ssh/sshd_config
 mkdir ~/.ssh
 cat >> ~/.ssh/authorized_keys << EOF
