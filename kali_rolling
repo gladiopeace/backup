@@ -6,7 +6,7 @@ passwd huatux
 apt-get install fcitx fcitx-googlepinyin
 
 #chrome 
-apt-get install libdbusmenu-glib4 libdbusmenu-gtk4 libindicator7 libappindicator1
+apt-get install libdbusmenu-glib4 libdbusmenu-gtk4 libindicator7 libappindicator3-1
 dpkg -i google-chrome-stable_current_amd64.deb
 
 #firefox-mozilla
